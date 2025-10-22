@@ -1,4 +1,4 @@
-# 🎓 AI-Driven Education Assistant (Supabase Edition)
+# AI-Driven Education Assistant (Supabase Edition)
 
 An **AI-powered adaptive learning assistant** that helps students learn smarter.  
 Upload study materials, ask questions in natural language, and get personalized, context-aware responses.  
