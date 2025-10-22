@@ -2,6 +2,8 @@ from fastapi import APIRouter, UploadFile, Form
 from app.ai_engine import get_answer_from_material, load_materials_to_vector_store
 from app.supabase_client import supabase
 
+from app.database_helpers import log_question_answer
+
 router = APIRouter()
 
 @router.post("/upload/")
@@ -21,6 +23,10 @@ async def upload_material(file: UploadFile):
     return {"message": "File uploaded and processed successfully.", "filename": file.filename}
 
 @router.post("/ask/")
-async def ask_question(question: str = Form(...)):
+async def ask_question(question: str = Form(...), user_id: str = Form(...)):
     answer = get_answer_from_material(question)
+
+    # Log interaction to Supabase
+    log_question_answer(user_id=user_id, question=question, answer=answer)
+    
     return {"answer": answer}
